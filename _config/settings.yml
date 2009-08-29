@@ -68,9 +68,9 @@ default:
     filter:          _classes/_filters
     
   image_uploader:
-    photo_upload_url:  /skirmishadmin.co.uk/upload/photo.html
-    file_upload_url:   /skirmishadmin.co.uk/upload/file.html
-    uploader_swf:      /skirmishadmin.co.uk/_js/yui/uploader/assets/uploader.swf
+    photo_upload_url:  /website.co.uk/upload/photo.html
+    file_upload_url:   /website.co.uk/upload/file.html
+    uploader_swf:      /website.co.uk/_js/yui/uploader/assets/uploader.swf
     
   base:
     domain:          _base/_domain
