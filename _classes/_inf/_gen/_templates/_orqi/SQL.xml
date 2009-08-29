@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<files>
+	<file>
+		<info>
+			<name>database.sql</name>
+			<location>_database</location>
+		</info>
+		<section>
+			<template>
+				create table `` (
+					`id` int not null auto_increment,
+					#section.fields#
+					primary key (`id`)
+				);
+			</template>
+		</section>
+		
+		<section id="fields">
+			<template>`#field#` int #field.required# null,</template>
+			<template>`#field#` varchar (#field.size#) #field.required# null,</template>
+			<template>`#field#` text #field.required# null,</template>
+		</section>
+	</file>
+</files>

@@ -1,0 +1,71 @@
+validation-rules:
+  siteowner:
+    name:           { checkfor: empty, message: "Name can't be empty" }
+    address:        { checkfor: empty, message: "You must type an address" }
+    postcode:       { checkfor: empty, message: "You must type a postcode" }
+    marchantnumber: { checkfor: validint, message: "A merchant number is not mandatory, but it must be a number" }
+  site:
+    name:           { checkfor: empty, message: "Name can't be empty" }
+    deposit:        { checkfor: validprice, message: "Deposit is not mandatory, but is should be a valid price (£10.00)" }
+    capacity:       { checkfor: validint, message: "A the site's capacity is not mandatory, but it must be a number" }
+    siteowner:      { checkfor: validint, message: "You need to select who the site is run by." }
+    address:        { checkfor: empty, message: "You must type an address" }
+    postcode:       { checkfor: empty, message: "You must type a postcode" }
+  package:
+    site:           { checkfor: validint, message: "You need to select the site the package is for." }
+    name:           { checkfor: empty, message: "Name can't be empty" }
+    price:          { checkfor: validprice, message: "You should enter a valid price (£10.00)" }
+    description:    { checkfor: empty, message: "Description can't be empty" }
+    deposit:        { checkfor: validprice, message: "Deposit is not mandatory, but is should be a valid price (£10.00)" }
+    lunchyesno:     { checkfor: empty, message: "Please say whether lunch is included or not." }
+    paintballs:     { checkfor: validint, message: "Say how many paintballs are included in the package." }
+    fulldayyesno:   { checkfor: empty, message: "Please say whether the package is a full-day or not." }
+  order:
+    name:           { checkfor: empty, message: "Name can't be empty" }
+    promocode:      { checkfor: empty, message: "Promocode can't be empty" }
+    package:        { checkfor: validint, message: "You need to select the package you are ordering." }
+    site:           { checkfor: validint, message: "You need to select the site you are going to." }
+    price:          { checkfor: validprice, message: "You should enter a valid price (£10.00)" }
+  gamezone:
+    site:           { checkfor: validint, message: "You need to select the site the game zone is for." }
+    name:           { checkfor: empty, message: "Name can't be empty" }
+    description:    { checkfor: empty, message: "Description can't be empty" }
+  blog:
+    site:           { checkfor: validint, message: "You need to select the site the post is for." }
+    title:          { checkfor: empty, message: "Title can't be empty" }
+    content:        { checkfor: empty, message: "Enter some content." }
+    user:           { checkfor: validint, message: "You need to select the user the post is by." }
+  comment:
+    blog:           { checkfor: validint, message: "Can't find the blog post to attach the comment to." }
+    content:        { checkfor: empty, message: "Enter a comment." }
+  promocode:
+    name:           { checkfor: empty, message: "Name can't be empty" }
+    validfrom:      { checkfor: validdate, message: "The from date must be a valid date (dd/mm/yyyy)" }
+    validto:        { checkfor: validdate, message: "The to date must be a valid date (dd/mm/yyyy)" }
+    amount:         { checkfor: validprice, message: "You should enter a valid price (£10.00)" }
+    percentage:     { checkfor: validint, message: "The percentage should be a number." }
+  fileupload:
+    _notes:         { hmm: "will most likely hard-code this as it's just a little tricky :p!" }
+  download:
+    name:           { checkfor: empty, message: "Name can't be empty" }
+    description:    { checkfor: empty, message: "Description can't be empty" }
+    file:           { checkfor: empty, message: "Please upload a file." }
+    file:           { checkfor: validint, message: "Please upload a file." }
+  user:
+    name:           { checkfor: empty, message: "Name can't be empty" }
+    username:       { checkfor: empty, message: "You must enter a username" }
+    username:       { checkfor: unique, message: "Your username must be unique" }
+    email:          { checkfor: validemail, message: "You must enter a valid email address." }
+    emailconfirm:   { checkfor: equals, field: email, message: "Your email address doesn't match the confirmation." }
+    password:       { checkfor: empty, message: "You must enter a password." }
+    passwordconfirm: { checkfor: equals, field: password, message: "Your password doesn't match the confirmation." }
+    activated:      { checkfor: empty, message: "Please say whether the user is activated or not." }
+    usergroup:      { checkfor: validint, message: "Please select a usergroup for the user." }
+  usergroup:
+    name:           { checkfor: empty, message: "Name can't be empty" }
+    level:          { checkfor: empty, message: "Level can't be empty" }
+    level:          { checkfor: validint, message: "Level must be a number" }
+  task:
+    controller:     { checkfor: empty, message: "Controller can't be empty" }
+    function:       { checkfor: empty, message: "Function can't be empty" }
+    usergroup:      { checkfor: validint, message: "Please select the lowest usergroup that can access this task." }

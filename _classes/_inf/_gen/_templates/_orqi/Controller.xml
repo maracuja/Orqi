@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<files>
+	<file>
+		<info>
+			<name>Base#Objectname#Controller.php</name>
+			<location>_base/_app</location>
+		</info>
+		<section>
+			<template>
+				class Base#Objectname#Controller extends Controller
+				{
+					function All()
+					{
+						$this->breadcrumb[] = new Breadcrumblink($this->MakeLink($this->get['object'],  'all'), '#Objectname.plural#');
+						
+						$this->object = new #Objectname.plural#();
+						$this->SetPagingVars();
+						$this->data = $this->object->FindAll($this->page['current']);
+			
+						$this->page_title = "All #Objectname.plural#";
+						$this->headercomponents = array('PageHeader');
+						$this->footercomponents = array('PageFooter');
+						
+						$this->listcolumns = array(
+							new ListColumn('#Object.label#', '#Object.label#', 200)
+						);
+						
+						$this->rowoptions = array(
+							new RowOption('Edit', 'edit', 4),
+							new RowOption('Delete', 'delete', 4)
+						);
+						
+						$this->LoadTemplate('DynamicList');
+					}
+					
+					function Add() { $this->Edit(); }
+					function Edit()
+					{
+						$this->breadcrumb[] = new Breadcrumblink($this->MakeLink($this->get['object'], 'all'), '#Objectname.plural#');
+						$breadcrumb_label = (empty($this->get['id'])) ? 'New ' : 'Editing ';
+						$this->breadcrumb[] = new Breadcrumblink('', $breadcrumb_label . ucwords($this->get['object']));
+						
+						$this->mapper = new #Objectname.plural#();
+						$this->form = new #Objectname#Validator();
+						
+						if (empty($this->post))
+						{	
+							if (!empty($this->get['id'])) $this->form->Populate($this->mapper->Find(new #Objectname#($this->get['id'])));
+						}
+						else
+						{
+							$this->form->Populate($this->post);
+							if ($this->form->isValid())
+							{
+								$object = new #Objectname#();
+								#section.fields#
+			
+								if ($this->mapper->Save($object))
+								{
+									$this->session->AddMessage(new Message('success', "The #objectname# was saved successfully."));
+									$this->Redirect($this->MakeLink($this->get['object'], 'all', 'id=' . $object->GetId()));
+								}
+								else
+								{
+									$this->session->AddMessage(new Message('error', "Couldn't save to the database"));
+								}
+							}
+						}
+						
+						$this->LoadTemplate('Form#Objectname#');
+					}
+				}
+			</template>
+		</section>
+		
+		<section id="fields">
+			<template>$object->Set#Field#($this->form->Get#Field#());</template>
+			<template>$object->Set#Field#(new #Field.Objectname#($this->form->Get#Field#()));</template>
+		</section>
+	</file>
+	
+	<file>
+		<info>
+			<name>#Objectname#Controller.php</name>
+			<location>_classes/_app</location>
+		</info>
+		<section>
+			<template>
+				class #Objectname#Controller extends Base#Objectname#Controller
+				{
+				}
+			</template>
+		</section>
+	</file>
+	
+	<file>
+		<info>
+			<name>Base#Objectname#ControllerTest.php</name>
+			<location>_test/_base/_app</location>
+		</info>
+		<section>
+			<template>
+				class Base#Objectname#ControllerTest extends PHPUnit
+				{
+				}
+			</template>
+		</section>
+	</file>
+	
+	<file>
+		<info>
+			<name>#Objectname#ControllerTest.php</name>
+			<location>_test/_classes/_app</location>
+		</info>
+		<section>
+			<template>
+				class #Objectname#ControllerTest extends Base#Objectname#ControllerTest
+				{
+				}
+			</template>
+		</section>
+	</file>
+</files>

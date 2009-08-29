@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<files>
+	<file>
+		<info>
+			<name>Base#Objectname.plural#.php</name>
+			<location>_base/_mapper</location>
+		</info>
+		<section>
+			<template>
+				class Base#Objectname.plural# extends Mapper
+				{
+					#section.defaults#
+					#section.searchables#
+					#section.subobjects#
+					#section.search#
+				}
+			</template>
+		</section>
+		
+		<section id="defaults">
+			<template>
+				function GetSelectBoxData($filter='')
+				{
+					$data = array();
+					$filter = (empty($filter)) ? "" : " where $filter ";
+					$sql_string = "select id as value, `#object.labelfield#` as text from #objectname.plural# $filter #order_by_clause#";
+					$recordset = $this->dao->ExecuteQuery($sql_string);
+					if ($recordset) while ($record = mysql_fetch_assoc($recordset)) $data[] = $record;
+					return $data;
+				}
+		
+				function GetTotalRows()
+				{
+					$sql_string = "select count(*) as total_rows from `#objectname.plural#`";
+					return $this->dao->GetValue($sql_string, 'total_rows');
+				}
+		
+				function FindAll($page='')
+				{
+					$sql_string = "select * from `#objectname.plural#` #order_by_clause#";
+					$sql_string .= $this->GetPageClause($page);
+					return $this->dao->GetObjectArray($sql_string, new #Objectname#());
+				}
+				
+				function Save(&$object)
+				{
+					$action_text = ($object->isNew()) ? "insert into " : "update ";
+					if (!$object->isNew()) $condition = "where id=" . $object->GetId();
+					$sql_string = "
+						$action_text	`#objectname.plural#`
+						set				#section.saveclauses#
+										$condition
+					";
+		
+					if ($this->dao->ExecuteQuery($sql_string))
+					{
+						if ($object->isNew()) $object->SetId(mysql_insert_id($this->dao->conn));
+						return true;
+					}
+					else return false;
+				}
+			</template>
+		</section>
+		
+		<section id="saveclauses">
+			<template>#separator# #field#=#field.quotmarks#" . $object->Get#Field#() . "#field.quotemarks#</template>
+			<template>#separator# #field#=" . $object->Get#Field#()->GetId() . "</template>
+		</section>
+		
+		<section id="searchables">
+			<templates>
+				function FindBy#Field#($#field#='')
+				{
+					if (empty($#field#)) return false;
+					$sql_string = "select * from `#objectname.plural#` where #field#=#field.quotemarks#" . $#field# . "#field.quotemarks# #order_by_clause# ";
+					return $this->dao->GetObject($sql_string, new #Objectname#());
+				}
+			</templates>
+		</section>
+		
+		<section id="subobjects">
+			<template>
+				function GetTotalRowsBy" . ucwords($name) . "($#field.objectname#='')
+				{
+					if (!is_a($#field.objectname#, '#field.Objectname#')) return 0;
+					$sql_string = "select count(*) as total_rows from `#objectname.plural#` where #field.objectname#=" . $#field.objectname#->GetId();
+					return $this->dao->GetValue($sql_string, 'total_rows');
+				}
+		
+				function FindBy" . ucwords($name) . "($#field.objectname#='', $page='')
+				{
+					if (!is_a($#field.objectname#, '#field.Objectname#')) return false;
+					$sql_string = "select * from `#objectname.plural#` where #field.objectname#=" . $#field.objectname#->GetId() . " #order_by_clause#";
+					$sql_string .= $this->GetPageClause($page);
+					return $this->dao->GetObjectArray($sql_string, new #Objectname#());
+				}
+			</template>
+		</section>
+		
+		<section id="search">
+			<template>
+				function GetTotalRowsBySearch($query='')
+				{
+					if (empty($query)) return 0;
+					$sql_string = "
+						select		count(*) as total_rows
+						from		#objectname.plural#
+						where		" . $this->GetQueryClause($query, array(#search_fields#)) . "
+					";
+					return $this->dao->GetValue($sql_string, 'total_rows');
+				}
+				
+				function FindBySearch($query='', $page='')
+				{
+					$data = array();
+					if (empty($query)) return $data;
+					$sql_string = "
+						select		*
+						from		#objectname.plural#
+						where		" . $this->GetQueryClause($query, array(#search_fields#)) . "
+									#order_by_clause#
+					";
+					$sql_string .= $this->GetPageClause($page);
+					return $this->dao->GetObject($sql_string, new new #Objectname#());
+				}
+			</template>
+		</section>
+		
+		<section id="search_fields">
+			<template>#separator# #field#</template>
+		</section>
+	</file>
+	
+	<file>
+		<info>
+			<name>#Objectname.plural#.php</name>
+			<location>_base/_mapper</location>
+		</info>
+		<section>
+			<template>
+				class #Objectname.plural# extends Base#Objectname.plural# { }
+			</template>
+		</section>
+	</file>
+	
+	<file>
+		<info>
+			<name>Base#Objectname.plural#Test.php</name>
+			<location>_test/_base/_mapper</location>
+		</info>
+		<section>
+			<template>
+				class Base#Objectname.plural#Test extends PHPUnit
+				{
+				}
+			</template>
+		</section>
+	</file>
+	
+	<file>
+		<info>
+			<name>#Objectname.plural#Test.php</name>
+			<location>_test/_classes/_mapper</location>
+		</info>
+		<section>
+			<template>
+				class #Objectname.plural#Test extends Base#Objectname.plural#Test
+				{
+				}
+			</template>
+		</section>
+	</file>
+</files>

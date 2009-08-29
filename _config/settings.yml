@@ -1,0 +1,165 @@
+default:
+  db:
+    host:            localhost
+    name:            skirmishpaintball_dev
+    user:            skirmish
+    pass:            skirmish
+
+  app:
+    location:        http://localhost/skirmishadmin.co.uk
+    public_location: http://localhost/skirmishpaintball.co.uk
+    title:           Skirmish Paintball Admin
+    author:          Real451
+    company:         Real451
+    
+    default_lang:      English
+    mod_rewrite:       true
+    unicode:           false
+    cookiename:        skirmish_admin
+    history:           true
+    extension:         html
+    date_format:       l d.m.y
+    summary_delimiter: \{more\}
+    error_tag:         p
+    error_tag_attr:    class='error'
+    
+  epdq:
+    post_url:          https://localhost/skirmishpaintball.co.uk/booking/fake.html
+    enc_server:        secure2.epdq.co.uk
+    enc_url:           /cgi-bin/CcxBarclaysEpdqEncTool.e
+    clientid:          28018
+    passphrase:        igd@r451
+    currencycode:      826
+    deliveryaddress:   0
+
+  date_formats:
+    default:         d/m/Y
+    offer:           l d.m.y
+
+  mail:
+    enabled:         true
+    name:            Skirmish Info
+    address:         david@orqi.co.uk
+    
+  image:
+    upload_thumbnail: { x: 30, y: 30, orientation: CM, scale: fit, default: /somepic.gif }
+    upload_preview:   { x: 300, y: 200, orientation: CM, scale: fit, default: /somepic.gif }
+    lifestylepic:     { x: 558, y: 365, orientation: CM, scale: fit, default: /somepic.gif, overlay: /overlay_large.png }
+    thumbnail:        { x: 100, y: 69, orientation: CM, scale: fit, default: /somepic.gif, overlay: /overlay_small.png }
+    
+  page:
+    items:           20
+    users:           10
+    tasks:           30
+    
+  filetypes:
+    default:         { type1: image/jpeg, type2: image/jpg, type3: image/gif, type4: image/png }
+    downloads:       { type1: application/pdf, type2: application/msword }
+
+  filters:           [Security]
+
+  classes:
+    domain:          _classes/_domain
+    mapper:          _classes/_mapper
+    validator:       _classes/_validator
+    app:             _classes/_app
+    inf:             _classes/_inf
+    ui:              _classes/_ui
+    filter:          _classes/_filters
+    
+  image_uploader:
+    photo_upload_url:  /skirmishadmin.co.uk/upload/photo.html
+    file_upload_url:   /skirmishadmin.co.uk/upload/file.html
+    uploader_swf:      /skirmishadmin.co.uk/_js/yui/uploader/assets/uploader.swf
+    
+  base:
+    domain:          _base/_domain
+    mapper:          _base/_mapper
+    validator:       _base/_validator
+    app:             _base/_app
+    
+  resource:
+    url:             http://localhost/skirmishpaintball.co.uk/_resources
+    path:            /home/maracuja/htdocs/skirmishpaintball.co.uk/_resources
+    img:             http://localhost/skirmishadmin.co.uk/_img
+    imgpath:         /home/maracuja/htdocs/skirmishpaintball.co.uk/_img
+    css:             http://localhost/skirmishadmin.co.uk/_css
+    js:              http://localhost/skirmishadmin.co.uk/_js
+    swf:             http://localhost/skirmishadmin.co.uk/_flash
+    lib:             _lib
+    lib_url:         http://localhost/skirmishadmin.co.uk/_lib
+
+carl:
+  resource:
+    path:            /Users/carldeathe/Sites/skirmishpaintball.co.uk/skirmishpaintball.co.uk/_resources
+    imgpath:         /Users/carldeathe/Sites/skirmishpaintball.co.uk/skirmishpaintball.co.uk/_img
+
+dev:
+  db:
+    name:            skirmish
+    user:            skirmish
+    pass:            p@intball1ng
+
+  app:
+    location:        http://skirmish.dev451.com/admin
+    public_location: http://skirmish.dev451.com/public
+    title:           Skirmish Paintball Admin
+    author:          Real451
+    company:         Real451
+    
+  epdq:
+    post_url:          https://secure2.epdq.co.uk/cgi-bin/CcxBarclaysEpdq.e
+    server:            secure2.epdq.co.uk
+    url:               /cgi-bin/CcxBarclaysEpdqEncTool.e
+
+  apikeys:
+    google_maps:     ABQIAAAA_O-OI9sAN3JPQeF2UI-o8hT0tGFv_LPy1PAlBSnzHk3IwryiyBRCV8Ytqy5rfTzG-mw7JOF7QH1y0A
+    flickr:          ad3301cf86ca1364acbf86ce53807285
+    
+  image_uploader:
+    photo_upload_url:  /admin/upload/photo.html
+    file_upload_url:   /admin/upload/file.html
+    uploader_swf:      /admin/_js/yui/uploader/assets/uploader.swf
+    
+  resource:
+    url:             http://skirmish.dev451.com/public/_resources
+    path:            /home/skirmish/web/public/_resources
+    img:             http://skirmish.dev451.com/admin/_img
+    imgpath:         /home/skirmish/web/public/_img
+    css:             http://skirmish.dev451.com/admin/_css
+    js:              http://skirmish.dev451.com/admin/_js
+    swf:             http://skirmish.dev451.com/admin/_flash
+    lib:             _lib
+    lib_url:         http://skirmish.dev451.com/admin/_lib
+
+virtual:
+  app:
+    location:        /skirmishadmin.co.uk
+    public_location: /skirmishpaintball.co.uk
+
+  resource:
+    url:             /skirmishpaintball.co.uk/_resources
+    path:            /home/maracuja/htdocs/skirmishpaintball.co.uk/_resources
+    img:             /skirmishadmin.co.uk/_img
+    imgpath:         /home/maracuja/htdocs/skirmishpaintball.co.uk/_img
+    css:             /skirmishadmin.co.uk/_css
+    js:              /skirmishadmin.co.uk/_js
+    swf:             /skirmishadmin.co.uk/_flash
+    lib:             _lib
+    lib_url:         /skirmishadmin.co.uk/_lib
+
+mbp:
+  app:
+    location:        http://localhost:8080/skirmishadmin.co.uk
+    public_location: http://localhost:8080/skirmishpaintball.co.uk
+    
+  epdq:
+    post_url:        http://localhost:8080/skirmishpaintball.co.uk/booking/fake.html
+    
+  resource:
+    url:             http://localhost:8080/skirmishpaintball.co.uk/_resources
+    img:             http://localhost:8080/skirmishadmin.co.uk/_img
+    css:             http://localhost:8080/skirmishadmin.co.uk/_css
+    js:              http://localhost:8080/skirmishadmin.co.uk/_js
+    swf:             http://localhost:8080/skirmishadmin.co.uk/_flash
+    lib_url:         http://localhost:8080/skirmishadmin.co.uk/_lib
