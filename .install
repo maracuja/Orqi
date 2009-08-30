@@ -1,0 +1,12 @@
+mkdir _base
+mkdir _base/_app
+mkdir _base/_validator
+mkdir _base/_domain
+mkdir _base/_mapper
+chmod -Rf 777 _base
+mkdir _classes/_app
+mkdir _classes/_validator
+mkdir _classes/_domain
+mkdir _classes/_mapper
+mkdir _classes/_ui
+chmod -Rf 777 _classes
