@@ -42,7 +42,7 @@
 					return $this->dao->GetObjectArray($sql_string, new #Objectname#());
 				}
 				
-				function Save($object)
+				function Save(&amp;$object)
 				{
 					$action_text = ($object->isNew()) ? "insert into " : "update ";
 					if (!$object->isNew()) $condition = "where id=" . $object->GetId();

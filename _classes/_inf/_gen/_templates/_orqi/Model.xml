@@ -107,8 +107,18 @@
 		</info>
 		<section>
 			<template>
-				class Base#Objectname#Test extends PHPUnit
+				class Base#Objectname#Test extends PHPUnit_Framework_TestCase
 				{
+					#section.testcase#
+				}
+			</template>
+		</section>
+		
+		<section id="testcase">
+			<template>
+				public function test#fieldname#()
+				{
+					$this->assertEquals($onething, $andanother);
 				}
 			</template>
 		</section>

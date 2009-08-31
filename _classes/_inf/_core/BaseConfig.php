@@ -145,7 +145,7 @@
 		
 		function LoadDirFiles($directory='')
 		{
-			$ignore_arr = array(".", "..", ".svn", "_mapping", "_validators", "_core", ".DS_Store");
+			$ignore_arr = array('.', '..', '.svn', '_mapping', '_validators', '_core', '.DS_Store', '_gen');
 			if ($handle = opendir($directory))
 			{
 				while (false !== ($file = readdir($handle)))
