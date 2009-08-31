@@ -187,6 +187,22 @@
 		
 		// ================================================================== //
 		
+		function LoadTestFiles()
+		{
+			$this->LoadDirFiles($this->classes['test'] . '/' . $this->base['domain']);
+			$this->LoadDirFiles($this->classes['test'] . '/' . $this->classes['domain']);
+
+			$this->LoadDirFiles($this->classes['test'] . '/' . $this->base['mapper']);
+			$this->LoadDirFiles($this->classes['test'] . '/' . $this->classes['mapper']);
+
+			$this->LoadDirFiles($this->classes['test'] . '/' . $this->base['validator']);
+			$this->LoadDirFiles($this->classes['test'] . '/' . $this->classes['validator']);
+			
+			// TODO include filter tests somewhere
+		}
+		
+		// ================================================================== //
+		
 		function apacheModuleIsLoaded($mod_name)
 		{
 			$modules = apache_get_modules();
