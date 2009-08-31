@@ -1,49 +1,52 @@
 <?php
-	class TestHarness
+	if (class_exists(PHPUnit_Framework_TestCase))
 	{
-		public $tests = array();
-		public $config;
-		
-		function __construct()
+		class TestHarness
 		{
-			$this->config = Config::GetInstance();
-		}
-		
-		public function GetSuite()
-		{
-			$this->LoadTests();
-			$suite = new PHPUnit_Framework_TestSuite('Project');
-			foreach ($this->tests as $test)
+			public $tests = array();
+			public $config;
+			
+			function __construct()
 			{
-				$suite->addTestSuite($test);
+				$this->config = Config::GetInstance();
 			}
-			return $suite;
-		}
-		
-		function LoadDirFiles($directory='')
-		{
-			$ignore_arr = array(".", "..", ".svn", "_mapping", "_validators", "_core", ".DS_Store");
-			if ($handle = opendir($directory))
+			
+			public function GetSuite()
 			{
-				while (false !== ($file = readdir($handle)))
+				$this->LoadTests();
+				$suite = new PHPUnit_Framework_TestSuite('Project');
+				foreach ($this->tests as $test)
 				{
-					if (!in_array($file, $ignore_arr))
+					$suite->addTestSuite($test);
+				}
+				return $suite;
+			}
+			
+			function LoadDirFiles($directory='')
+			{
+				$ignore_arr = array(".", "..", ".svn", "_mapping", "_validators", "_core", ".DS_Store");
+				if ($handle = opendir($directory))
+				{
+					while (false !== ($file = readdir($handle)))
 					{
-						$this->tests[] = str_replace('.php', '', $file);
+						if (!in_array($file, $ignore_arr))
+						{
+							$this->tests[] = str_replace('.php', '', $file);
+						}
 					}
 				}
+	
+				closedir($handle);
 			}
-
-			closedir($handle);
-		}
-		
-		function LoadTests()
-		{
-			$this->LoadDirFiles($this->config->classes['test'] . '/' . $this->config->base['domain']);
-			$this->LoadDirFiles($this->config->classes['test'] . '/' . $this->config->classes['domain']);
-			$this->LoadDirFiles($this->config->classes['test'] . '/' . $this->config->base['mapper']);
-			$this->LoadDirFiles($this->config->classes['test'] . '/' . $this->config->classes['mapper']);
-			$this->LoadDirFiles($this->config->classes['test'] . '/' . $this->config->base['validator']);
-			$this->LoadDirFiles($this->config->classes['test'] . '/' . $this->config->classes['validator']);
+			
+			function LoadTests()
+			{
+				$this->LoadDirFiles($this->config->classes['test'] . '/' . $this->config->base['domain']);
+				$this->LoadDirFiles($this->config->classes['test'] . '/' . $this->config->classes['domain']);
+				$this->LoadDirFiles($this->config->classes['test'] . '/' . $this->config->base['mapper']);
+				$this->LoadDirFiles($this->config->classes['test'] . '/' . $this->config->classes['mapper']);
+				$this->LoadDirFiles($this->config->classes['test'] . '/' . $this->config->base['validator']);
+				$this->LoadDirFiles($this->config->classes['test'] . '/' . $this->config->classes['validator']);
+			}
 		}
 	}
