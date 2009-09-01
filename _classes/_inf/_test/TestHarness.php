@@ -24,19 +24,21 @@
 			
 			function LoadDirFiles($directory='')
 			{
-				$ignore_arr = array(".", "..", ".svn", "_mapping", "_validators", "_core", ".DS_Store");
-				if ($handle = opendir($directory))
+				if (is_dir($directory))
 				{
-					while (false !== ($file = readdir($handle)))
+					$ignore_arr = array(".", "..", ".svn", "_mapping", "_validators", "_core", ".DS_Store");
+					if ($handle = opendir($directory))
 					{
-						if (!in_array($file, $ignore_arr))
+						while (false !== ($file = readdir($handle)))
 						{
-							$this->tests[] = str_replace('.php', '', $file);
+							if (!in_array($file, $ignore_arr))
+							{
+								$this->tests[] = str_replace('.php', '', $file);
+							}
 						}
 					}
+					closedir($handle);
 				}
-	
-				closedir($handle);
 			}
 			
 			function LoadTests()

@@ -145,20 +145,22 @@
 		
 		function LoadDirFiles($directory='')
 		{
-			$ignore_arr = array('.', '..', '.svn', '_mapping', '_validators', '_core', '.DS_Store', '_gen');
-			if ($handle = opendir($directory))
+			if (is_dir($directory))
 			{
-				while (false !== ($file = readdir($handle)))
+				$ignore_arr = array('.', '..', '.svn', '_mapping', '_validators', '_core', '.DS_Store');
+				if ($handle = opendir($directory))
 				{
-					if (!in_array($file, $ignore_arr))
+					while (false !== ($file = readdir($handle)))
 					{
-						if (is_dir($directory . "/" . $file)) $this->LoadDirFiles($directory . "/" . $file);
-						else $this->LoadFile($directory . "/" . $file);
+						if (!in_array($file, $ignore_arr))
+						{
+							if (is_dir($directory . "/" . $file)) $this->LoadDirFiles($directory . "/" . $file);
+							else $this->LoadFile($directory . "/" . $file);
+						}
 					}
 				}
+				closedir($handle);
 			}
-
-			closedir($handle);
 		}
 		
 		// ================================================================== //

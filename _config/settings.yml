@@ -66,7 +66,9 @@ default:
     inf:             _classes/_inf
     ui:              _classes/_ui
     filter:          _classes/_filters
+    # i don't really know where else to put these so they're in the classes section until something better comes along
     test:            _test
+    generator:       _config/_generator
     
   image_uploader:
     photo_upload_url:  /website.co.uk/upload/photo.html
